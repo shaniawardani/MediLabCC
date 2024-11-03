@@ -189,9 +189,9 @@
             });
         });
 
-        // Login Handling
+       // Login Handling
         document.getElementById("login-btn").addEventListener("click", function (e) {
-         e.preventDefault(); // Prevent page reload
+            e.preventDefault(); // Prevent page reload
 
             const email = document.getElementById("email").value; // Use correct ID for login email
             const password = document.getElementById("login-pass").value; // Use correct ID for login password
@@ -210,9 +210,18 @@
                 })
                 .catch((error) => {
                     // Handle errors during login
+                    const errorCode = error.code;
                     const errorMessage = error.message;
-                    alert(`Login failed: ${errorMessage}`);
-                    
+
+                    // Handle specific error codes
+                    if (errorCode === 'auth/user-not-found') {
+                        alert("Akun tidak ditemukan. Harap periksa email Anda.");
+                    } else if (errorCode === 'auth/wrong-password') {
+                        alert("Password yang dimasukkan salah.");
+                    } else {
+                        alert(`Login failed: ${errorMessage}`);
+                    }
+
                     // Optional: Clear input fields to encourage re-login
                     document.getElementById("email").value = '';
                     document.getElementById("login-pass").value = '';
