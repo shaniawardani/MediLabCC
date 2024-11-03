@@ -97,13 +97,14 @@ body {
     margin-bottom: 20px; /* Spasi antar profil */
     display: flex; /* Gunakan flex untuk menata gambar dan teks */
     align-items: center; /* Vertikal align di tengah */
+    gap: 20px;
 }
 
 .member-photo {
     width: 100px; /* Ukuran foto */
     height: 100px; /* Ukuran foto */
     border-radius: 50%; /* Membuat foto berbentuk lingkaran */
-    margin-right: 20px; /* Spasi antara foto dan teks */
+    margin-right: 15px; /* Spasi antara foto dan teks */
 }
 
 .member-profile h2 {

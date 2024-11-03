@@ -34,11 +34,11 @@
             </div>
             <div class="two-forms">
                 <div class="input-box">
-                    <input type="text" class="input-fields" placeholder="Username or Email" id="Username">
+                    <input type="text" class="input-fields" placeholder="Username or Email" id="email" required>
                     <i class="bx bx-user"></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" class="input-fields" placeholder="Password" id="login-pass">
+                    <input type="password" class="input-fields" placeholder="Password" id="login-pass" required>
                     <i class="bx bx-lock-alt"></i>
                 </div>
             </div>
@@ -63,20 +63,20 @@
             </div>
             <div class="two-forms">
                 <div class="input-box">
-                    <input type="text" class="input-fields" placeholder="Firstname" id="fn">
+                    <input type="text" class="input-fields" placeholder="Firstname" id="fn" required>
                     <i class="bx bx-user"></i>
                 </div>
                 <div class="input-box">
-                    <input type="text" class="input-fields" placeholder="Lastname" id="ln">
+                    <input type="text" class="input-fields" placeholder="Lastname" id="ln" required>
                     <i class="bx bx-user"></i>
                 </div>
             </div>
             <div class="input-box">
-                <input type="email" class="input-fields" placeholder="Email" id="email">
+                <input type="email" class="input-fields" placeholder="Email" id="reg-email" required>
                 <i class="bx bx-envelope"></i>
             </div>
             <div class="input-box">
-                <input type="password" class="input-fields" placeholder="Password" id="pass">
+                <input type="password" class="input-fields" placeholder="Password" id="pass" required>
                 <i class="bx bx-lock-alt"></i>
             </div>
             <div class="input-box">
@@ -104,116 +104,116 @@
         import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-    
-        // Konfigurasi Firebase
+        // Firebase Configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyA4Rs6FtnHJFy0438vd_E7Bj95fFDKKG7w",
-            authDomain: "cloud-computing-41a84.firebaseapp.com",
-            databaseURL: "https://cloud-computing-41a84-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "cloud-computing-41a84",
-            storageBucket: "cloud-computing-41a84.appspot.com",
-            messagingSenderId: "777679253551",
-            appId: "1:777679253551:web:38d1fb0daece7e167196da",
-            measurementId: "G-H56T8QCF3J"
+            apiKey: "AIzaSyAebhAXefm1oJQr1mqOu9lA1LVVKNRPFeQ",
+            authDomain: "authfirebase-86c77.firebaseapp.com",
+            projectId: "authfirebase-86c77",
+            storageBucket: "authfirebase-86c77.firebasestorage.app",
+            messagingSenderId: "575022160860",
+            appId: "1:575022160860:web:1ae0b0ee5d5071f6660d19",
+            measurementId: "G-NDD8LQCGT0"
         };
-    
-        // Inisialisasi Firebase
+
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
         const auth = getAuth(app);
-    
-        // Ambil elemen-elemen dari DOM
+
+        // DOM Elements
         const loginContainer = document.getElementById("login");
         const registerContainer = document.getElementById("register");
 
         function login() {
-            loginContainer.style.display = "block"; // tampilkan login
-            registerContainer.style.display = "none"; // sembunyikan register
+            loginContainer.style.display = "block"; // Show login
+            registerContainer.style.display = "none"; // Hide register
         }
 
         function register() {
-            loginContainer.style.display = "none"; // sembunyikan login
-            registerContainer.style.display = "block"; // tampilkan register
+            loginContainer.style.display = "none"; // Hide login
+            registerContainer.style.display = "block"; // Show register
         }
 
-        function handleLogin() {
-            window.location.href = "home.html"; // Redirect ke halaman home setelah login
-        }
-
-        function handleRegister() {
-            alert("Registration successful! Please login.");
-            login(); // Pindah ke form login setelah registrasi
-        }
-
-        // Ambil tombol login dan register
-        const loginButton = document.getElementById('login-btn');
-        const registerButton = document.getElementById('reg');
-
-        // Tambahkan event listener ke tombol login dan register
-        if (loginButton) loginButton.onclick = handleLogin;
-        if (registerButton) registerButton.onclick = handleRegister;
-
-        // Ambil elemen Sign Up link dan tambahkan event listener
+        // Event Listener for Sign Up Link
         document.getElementById('sign-up-link').addEventListener('click', function(e) {
-            e.preventDefault(); // Mencegah reload halaman
-            register(); // Panggil fungsi register
+            e.preventDefault(); // Prevent page reload
+            register(); // Switch to register form
         });
-    
-        // Inisialisasi: Tampilkan form login secara default
+
+        // Initialize: Show login form by default
         window.onload = function() {
             login();
         };
-    
-        // Fungsi untuk menangani registrasi dan menyimpan data ke Firebase Realtime Database
+
+        // Registration Handling
         document.getElementById("reg").addEventListener('click', function(e) {
-            e.preventDefault(); // Mencegah reload halaman
+            e.preventDefault(); // Prevent page reload
             
-            const email = document.getElementById("email").value;
+            const email = document.getElementById("reg-email").value;
             const password = document.getElementById("pass").value;
             const firstname = document.getElementById("fn").value;
             const lastname = document.getElementById("ln").value;
 
+            // Validasi input
+            if (!email || !password || !firstname || !lastname) {
+                alert("Harap isi semua kolom.");
+                return;
+            }
+
             createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-          
-            // Simpan data pengguna ke Realtime Database
-            set(ref(db, 'users/' + email.replace('.', '_')), {
-                email: email,
-                password: password,
-                firstname: firstname,
-                lastname: lastname
-            })
-            .then(() => {
-                alert("Register Succeed");
-                handleRegister();
+
+                // Save user data to Realtime Database
+                set(ref(db, 'users/' + user.uid), {
+                    email: email,
+                    firstname: firstname,
+                    lastname: lastname
+                })
+                .then(() => {
+                    alert("Registration successful! Please login.");
+                    login(); // Switch to login form after successful registration
+                })
+                .catch((error) => {
+                    console.error("Error saving user data:", error);
+                    alert("Failed to save user data.");
+                });
             })
             .catch((error) => {
-                console.error("Error saat registrasi:", error);
-                alert("Register Failed");
+                console.error("Registration failed:", error);
+                if (error.code === "auth/email-already-in-use") {
+                    alert("Email ini sudah terdaftar. Silakan gunakan email lain atau login.");
+                } else {
+                    alert("Registration failed: " + error.message);
+                }
             });
         });
-    });
 
-    document.getElementById("login-btn").addEventListener("click", function (e) {
-    e.preventDefault();
+        // Login Handling
+        document.getElementById("login-btn").addEventListener("click", function (e) {
+            e.preventDefault(); // Prevent page reload
 
-    const email = document.getElementById("Username").value;
-    const password = document.getElementById("pass").value;
+            const email = document.getElementById("email").value; // Use correct ID for login email
+            const password = document.getElementById("login-pass").value; // Use correct ID for login password
 
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Login berhasil
-            alert("Login Succeed");
-            window.location.href = "home.html"; // Redirect ke halaman utama
-        })
-        .catch((error) => {
-            // Tampilkan pesan error jika login gagal
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(`Login Failed: ${errorMessage}`);
+            // Validasi input
+            if (!email || !password) {
+                alert("Harap isi email dan password.");
+                return;
+            }
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Login successful
+                    alert("Login successful!");
+                    window.location.href = "home.html"; // Redirect to home page
+                })
+                .catch((error) => {
+                    // Handle errors during login
+                    const errorMessage = error.message;
+                    alert(`Login failed: ${errorMessage}`);
+                });
         });
-});
     </script>
 </body>
 </html>
