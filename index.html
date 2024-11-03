@@ -191,7 +191,7 @@
 
         // Login Handling
         document.getElementById("login-btn").addEventListener("click", function (e) {
-            e.preventDefault(); // Prevent page reload
+         e.preventDefault(); // Prevent page reload
 
             const email = document.getElementById("email").value; // Use correct ID for login email
             const password = document.getElementById("login-pass").value; // Use correct ID for login password
@@ -212,8 +212,13 @@
                     // Handle errors during login
                     const errorMessage = error.message;
                     alert(`Login failed: ${errorMessage}`);
+                    
+                    // Optional: Clear input fields to encourage re-login
+                    document.getElementById("email").value = '';
+                    document.getElementById("login-pass").value = '';
                 });
         });
+
     </script>
 </body>
 </html>
