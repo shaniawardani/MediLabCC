@@ -140,6 +140,12 @@
             register(); // Switch to register form
         });
 
+        document.getElementById('reg').addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent page reload
+            login(); // Switch to register form
+        });
+
+
         // Initialize: Show login form by default
         window.onload = function() {
             login();
@@ -192,6 +198,7 @@
        // Login Handling
         document.getElementById("login-btn").addEventListener("click", function (e) {
             e.preventDefault(); // Prevent page reload
+
 
             const email = document.getElementById("email").value; // Use correct ID for login email
             const password = document.getElementById("login-pass").value; // Use correct ID for login password
