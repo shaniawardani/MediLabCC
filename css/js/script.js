@@ -4,15 +4,14 @@
  
   // Your web app's Firebase configuration
   const firebaseConfig = {
-    apiKey: "AIzaSyA4Rs6FtnHJFy0438vd_E7Bj95fFDKKG7w",
-    authDomain: "cloud-computing-41a84.firebaseapp.com",
-    databaseURL: "https://cloud-computing-41a84-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "cloud-computing-41a84",
-    storageBucket: "cloud-computing-41a84.appspot.com",
-    messagingSenderId: "777679253551",
-    appId: "1:777679253551:web:38d1fb0daece7e167196da",
-    measurementId: "G-H56T8QCF3J"
-  };
+    apiKey: "AIzaSyAebhAXefm1oJQr1mqOu9lA1LVVKNRPFeQ",
+    authDomain: "authfirebase-86c77.firebaseapp.com",
+    projectId: "authfirebase-86c77",
+    storageBucket: "authfirebase-86c77.firebasestorage.app",
+    messagingSenderId: "575022160860",
+    appId: "1:575022160860:web:1ae0b0ee5d5071f6660d19",
+    measurementId: "G-NDD8LQCGT0"
+};
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
